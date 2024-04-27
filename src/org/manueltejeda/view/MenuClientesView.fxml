@@ -30,22 +30,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" prefHeight="100.0" prefWidth="175.0" style="-fx-background-radius: 10; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 10; -fx-border-width: 5;" text="AGREGAR" textAlignment="CENTER" textFill="#f5dab8">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="175.0" style="-fx-background-radius: 10; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 10; -fx-border-width: 5;" text="AGREGAR" textAlignment="CENTER" textFill="#f5dab8">
                <font>
                   <Font name="SansSerif Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" prefHeight="100.0" prefWidth="175.0" style="-fx-background-radius: 10; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 10; -fx-border-width: 5;" text="EDITAR" textAlignment="CENTER" textFill="#f5dab8" GridPane.rowIndex="1">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="175.0" style="-fx-background-radius: 10; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 10; -fx-border-width: 5;" text="EDITAR" textAlignment="CENTER" textFill="#f5dab8" GridPane.rowIndex="1">
                <font>
                   <Font name="SansSerif Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" prefHeight="100.0" prefWidth="175.0" style="-fx-background-radius: 10; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 10; -fx-border-width: 5;" text="ELIMINAR" textAlignment="CENTER" textFill="#f5dab8" GridPane.rowIndex="2">
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="175.0" style="-fx-background-radius: 10; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 10; -fx-border-width: 5;" text="ELIMINAR" textAlignment="CENTER" textFill="#f5dab8" GridPane.rowIndex="2">
                <font>
                   <Font name="SansSerif Bold" size="20.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="100.0" prefWidth="175.0" style="-fx-background-radius: 10; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 10; -fx-border-width: 5;" text="REPORTES" textAlignment="CENTER" textFill="#f5dab8" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="100.0" prefWidth="175.0" style="-fx-background-radius: 10; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 10; -fx-border-width: 5;" text="REPORTES" textAlignment="CENTER" textFill="#f5dab8" GridPane.rowIndex="3">
                <font>
                   <Font name="SansSerif Bold" size="20.0" />
                </font>
@@ -62,16 +62,23 @@
             <TableColumn fx:id="colNit" prefWidth="90.0" text="nit" />
         </columns>
       </TableView>
-      <TextField fx:id="tfClienteId" layoutX="451.0" layoutY="59.0" prefHeight="39.0" prefWidth="430.0" promptText="Ingrese el ID del Cliente" />
-      <Button fx:id="btnBuscar" layoutX="881.0" layoutY="59.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="60.0" style="-fx-background-radius: 0; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 0; -fx-border-width: 4;" textAlignment="CENTER" textFill="#f5dab8">
+      <TextField fx:id="tfClienteId" layoutX="451.0" layoutY="59.0" prefHeight="45.0" prefWidth="430.0" promptText="Ingrese el ID del Cliente" />
+      <Button fx:id="btnBuscar" layoutX="881.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="39.0" prefWidth="60.0" style="-fx-background-radius: 0; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 0; -fx-border-width: 4;" textAlignment="CENTER" textFill="#f5dab8">
+         <font>
+            <Font name="SansSerif Bold" size="10.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/lupa.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnRegresar" layoutX="995.0" layoutY="59.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="104.0" style="-fx-background-radius: 0; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 0; -fx-border-width: 4;" text="REGRESAR" textAlignment="CENTER" textFill="#f5dab8">
          <font>
             <Font name="SansSerif Bold" size="10.0" />
          </font>
       </Button>
-      <ImageView fitHeight="29.0" fitWidth="30.0" layoutX="897.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/lupa.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

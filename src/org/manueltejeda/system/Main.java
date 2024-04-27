@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import org.manueltejeda.controller.FormClientesController;
 import org.manueltejeda.controller.MenuClientesController;
 import org.manueltejeda.controller.MenuPrincipalController;
+import org.manueltejeda.controller.MenuTicketSoporteController;
 
 /**
  *
@@ -73,6 +74,15 @@ public class Main extends Application {
             FormClientesController formClientesView = (FormClientesController)switchScene("FormClientesView.fxml", 500, 700);
             formClientesView.setOp(op);
             formClientesView.setStage(this);           
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void menuTicketSoporteView(){
+        try{
+            MenuTicketSoporteController menuTicketSoporteView = (MenuTicketSoporteController)switchScene("MenuTicketSoporteView.fxml", 1200, 750);
+            menuTicketSoporteView.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
