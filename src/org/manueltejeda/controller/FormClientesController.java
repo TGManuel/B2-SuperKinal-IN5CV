@@ -19,6 +19,7 @@ import org.manueltejeda.dao.Conexion;
 import org.manueltejeda.dto.ClienteDTO;
 import org.manueltejeda.model.Cliente;
 import org.manueltejeda.system.Main;
+import org.manueltejeda.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -54,7 +55,9 @@ public class FormClientesController implements Initializable {
             ClienteDTO.getClienteDTO().setCliente(null);
         }else if(event.getSource() == btnGuardar){
             if(op == 1){
+                //if(tfNombre.getText().equals("") && tfApellido.getText())
                 agregarCliente();
+                SuperKinalAlert.getInstance().mostrarAlertaInfo(401);
                 stage.menuClientesView();
             }else if(op == 2){
                 editarCliente();
