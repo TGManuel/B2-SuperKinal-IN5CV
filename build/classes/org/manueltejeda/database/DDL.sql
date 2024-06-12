@@ -71,17 +71,17 @@ create table TicketSoporte(
     descripcionTicket varchar(250) not null,
     estatus varchar(30) not null,
     clienteId int not null,
-    facturaID int not null,
+    facturaId int not null,
     primary key PK_ticketSoporteId(ticketSoporteId),
     constraint FK_TicketSoporte_Clientes foreign key (clienteId)
 		references Clientes(clienteId),
-    constraint FK_TicketSoporte_Facturas foreign key (facturaID)
+    constraint FK_TicketSoporte_Facturas foreign key (facturaId)
 		references Facturas(facturaId)
 );
 
 create table Productos(
 	productoId int not null auto_increment,
-    nombreProducto varchar(50) not null,
+    c varchar(50) not null,
     descripcionProducto varchar(100),
     cantidadStock int not null,
     precioVentaUnitario decimal(10,2) not null,
@@ -128,3 +128,23 @@ create table DetalleFactura(
     constraint FK_DetalleFacturas_Productos foreign key (productoId) 
 		references Productos(productoId)
 );
+
+create table NivelesAcceso(
+	nivelAccesoId int not null auto_increment,
+    nivelAcceso varchar(40) not null,
+    primary key PK_nivelAccesoId (nivelAccesoId)
+);
+
+create table Ususarios(
+	usuarioId int not null auto_increment,
+    usuario varchar(30) not null,
+    contra varchar(100) not null, 
+    nivelAccesoId int not null,
+    empleadoId int not null,
+    primary key PK_usuarioId(usuarioId),
+    constraint FK_Usuarios_NivelesAcceso foreign key Usuarios (nivelAccesoId)
+		references NivelesAcceso (nivelAccesoId),
+	constraint FK_Usuarios_Empleados foreign key Usuarios (empleadoId)
+		references Empleados (empleadoId)
+);
+

@@ -89,7 +89,7 @@ public class MenuTicketSoporteController implements Initializable {
         colTicketId.setCellValueFactory(new PropertyValueFactory<TicketSoporte, Integer>("ticketSoporteId"));
         colDescripcion.setCellValueFactory(new PropertyValueFactory<TicketSoporte, String>("descripcionTicket"));
         colEstatus.setCellValueFactory(new PropertyValueFactory<TicketSoporte, String>("estatus"));
-        colCliente.setCellValueFactory(new PropertyValueFactory<TicketSoporte, String>("clienteId"));
+        colCliente.setCellValueFactory(new PropertyValueFactory<TicketSoporte, String>("cliente"));
         colFactura.setCellValueFactory(new PropertyValueFactory<TicketSoporte, String>("facturaId"));
         tblTickets.getSortOrder().add(colTicketId);
     }
@@ -126,14 +126,14 @@ public class MenuTicketSoporteController implements Initializable {
         ArrayList<TicketSoporte> tickets = new ArrayList<>();
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = " call sp_ListarTicketSoporte()";
+            String sql = "call sp_ListarTicketSoporte()";
             statement = conexion.prepareStatement(sql);
             resultSet = statement.executeQuery();
             while(resultSet.next()){
                 int ticketSoporteId = resultSet.getInt("ticketSoporteId");
                 String descripcion = resultSet.getString("descripcionTicket");
                 String estatus = resultSet.getString("estatus");
-                String cliente = resultSet.getString("clienteId");
+                String cliente = resultSet.getString("cliente");
                 int facturaId = resultSet.getInt("facturaId");
                 
                 tickets.add(new TicketSoporte(ticketSoporteId,descripcion, estatus, cliente, facturaId));
@@ -203,10 +203,11 @@ public class MenuTicketSoporteController implements Initializable {
     public void agregarTicket(){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_AgregarTicketSoporte(?,?)";
+            String sql = "call sp_AgregarTicketSoporte(?,?,?)";
             statement = conexion.prepareStatement(sql);
             statement.setString(1, taDescripcion.getText());
             statement.setInt(2, ((Cliente)cmbClientes.getSelectionModel().getSelectedItem()).getClienteId());
+            statement.setInt(3,4); 
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -256,6 +257,7 @@ public class MenuTicketSoporteController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         cargarCmbEstatus();
         cmbClientes.setItems(listarClientes());
+        cargarDatos();
     }    
 
     public Main getStage() {

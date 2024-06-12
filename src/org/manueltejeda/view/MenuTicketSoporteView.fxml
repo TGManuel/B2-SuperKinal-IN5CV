@@ -21,11 +21,11 @@
       <TextArea fx:id="taDescripcion" layoutX="83.0" layoutY="300.0" prefHeight="161.0" prefWidth="265.0" wrapText="true" />
       <ComboBox fx:id="cmbClientes" layoutX="412.0" layoutY="210.0" prefHeight="40.0" prefWidth="265.0" />
       <ComboBox fx:id="cmbFacturas" layoutX="723.0" layoutY="210.0" prefHeight="40.0" prefWidth="265.0" />
-      <TableView fx:id="tblTickets" layoutX="406.0" layoutY="287.0" opacity="0.72" prefHeight="389.0" prefWidth="720.0">
+      <TableView fx:id="tblTickets" layoutX="406.0" layoutY="287.0" onMouseClicked="#cargarDatosEditar" opacity="0.72" prefHeight="389.0" prefWidth="720.0">
         <columns>
           <TableColumn fx:id="colTicketId" prefWidth="84.0" text="Ticket ID" />
           <TableColumn fx:id="colDescripcion" minWidth="0.0" prefWidth="209.0" text="Descripción" />
-            <TableColumn fx:id="colEstarus" prefWidth="129.0" text="Estatus" />
+            <TableColumn fx:id="colEstatus" prefWidth="129.0" text="Estatus" />
             <TableColumn fx:id="colCliente" prefWidth="165.0" text="Cliente" />
             <TableColumn fx:id="colFactura" prefWidth="132.0" text="Factura" />
         </columns>
@@ -37,6 +37,11 @@
          </font>
       </Button>
       <Button fx:id="btnGuardar" layoutX="83.0" layoutY="564.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="104.0" style="-fx-background-radius: 0; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 0; -fx-border-width: 4;" text="GUARDAR" textAlignment="CENTER" textFill="#f5dab8">
+         <font>
+            <Font name="SansSerif Bold" size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnVaciar" layoutX="244.0" layoutY="564.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="45.0" prefWidth="104.0" style="-fx-background-radius: 0; -fx-background-color: #F59A5D; -fx-border-color: #F57E5D; -fx-border-radius: 0; -fx-border-width: 4;" text="VACIAR" textAlignment="CENTER" textFill="#f5dab8">
          <font>
             <Font name="SansSerif Bold" size="10.0" />
          </font>

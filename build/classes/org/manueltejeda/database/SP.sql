@@ -115,13 +115,16 @@ DELIMITER $$
         end $$
 DELIMITER ;
  
--- call  sp_AgregarEmpleado('1', '2', 2.5, '10:10:10', '10:10:10', 1);
+call  sp_AgregarEmpleado('1', '2', 2.5, '10:10:10', '10:10:10', 1);
  
 DELIMITER $$
 create procedure sp_ListarEmpleados()
 	begin 
-		select *
-			from Empleados;
+		select E.empleadoId, E.nombreEmpleado, E.apellidoEmpleado, E.sueldo, E.horaEntrada, E.horaSalida,
+			CONCAT('ID: ', C.cargoId, ' | ', C.nombreCargo,' | ',C.descripcionCargo) AS 'cargo',
+            E.encargadoId
+			from Empleados E
+		join Cargos C on E.cargoId = C.cargoId;
     end $$
 DELIMITER ;
  
@@ -255,7 +258,7 @@ delimiter $$
 create procedure sp_buscarCategoriaProducto(catId int)
 	begin 
 		select *from CategoriaProductos
-        where categoriaProductoId = catId;
+        where categoriaProductosId = catId;
     end $$
 delimiter ;
  
@@ -371,12 +374,14 @@ DELIMITER ;
 call sp_BuscarTicketSoporte(1);
 
 DELIMITER $$
-create procedure sp_AgregarFactura(fech date, hor time, cliId int(11), empId int(11), tot decimal(10,2))
+create procedure sp_AgregarFactura(cliId int(11), empId int(11), tot decimal(10,2))
 begin
 insert into Facturas(fecha,hora,clienteId,empleadoId,total)values
-(fech,hor,cliId,empId,tot);
+(current_date(),current_time(),cliId,empId,tot);
 end $$
 DELIMITER ;
+
+call sp_AgregarFactura(1, 2 ,10.5);
  
 -- Listar
 DELIMITER $$
@@ -450,4 +455,16 @@ create procedure sp_BuscarProducto(proId int)
 begin
 select * from Productos where productoId = proId;
 end $$
+DELIMITER ;
+
+DELIMITER $$
+create procedure sp_agregarUsuario(us varchar(30), con varchar(100), nivAccId int, empId int)
+	begin 
+		insert into Usuarios (usuario, contra, nivelAccesoId, empleadoId) values
+			(us, con, nivAccId, empId);
+    end $$
+DELIMITER ;
+
+DELIMITER $$
+
 DELIMITER ;
