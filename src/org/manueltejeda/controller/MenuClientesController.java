@@ -52,7 +52,7 @@ public class MenuClientesController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO
+        cargarLista();
     } 
     
     @FXML
@@ -101,7 +101,7 @@ public class MenuClientesController implements Initializable {
         
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_ListarClientes()";
+            String sql = "call sp_listarClientes()";
             statement = conexion.prepareStatement(sql);
             resultSet = statement.executeQuery();
             

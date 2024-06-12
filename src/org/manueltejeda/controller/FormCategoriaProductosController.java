@@ -14,82 +14,74 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.manueltejeda.dao.Conexion;
-import org.manueltejeda.dto.ClienteDTO;
-import org.manueltejeda.model.Cliente;
+import org.manueltejeda.dto.CategoriaProductoDTO;
+import org.manueltejeda.model.CategoriaProducto;
 import org.manueltejeda.system.Main;
-import org.manueltejeda.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
  *
  * @author usuario
  */
-public class FormClientesController implements Initializable {
+public class FormCategoriaProductosController implements Initializable {
     private Main stage;
     private int op;
     
+    private static Connection conexion;
+    private static PreparedStatement statement;
+    
     @FXML
-    TextField tfClienteId, tfNombre, tfApellido, tfTelefono, tfDireccion, tfNit;
-   
+    TextField tfCategoriaProductoId, tfNombreCategoria ;
+    @FXML
+    TextArea taDescripcionCategoria;
     @FXML
     Button btnGuardar, btnCancelar;
     
-    private static Connection conexion;
-    private static PreparedStatement statement;
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(ClienteDTO.getClienteDTO().getCliente() != null){
-            cargarDatos(ClienteDTO.getClienteDTO().getCliente());
+        if(CategoriaProductoDTO.getCategoriaProductoDTO().getCategoriaProducto() != null){
+            cargarDatos(CategoriaProductoDTO.getCategoriaProductoDTO().getCategoriaProducto());
         }
-    }  
+    }
     
     @FXML
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnCancelar){
-            stage.menuClientesView();
-            ClienteDTO.getClienteDTO().setCliente(null);
+            stage.menuCategoriaProductoView();
+            CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto(null);
         }else if(event.getSource() == btnGuardar){
             if(op == 1){
-                //if(tfNombre.getText().equals("") && tfApellido.getText())
-                agregarCliente();
-                SuperKinalAlert.getInstance().mostrarAlertaInfo(401);
-                stage.menuClientesView();
+                agregarCategoriaProducto();
+                stage.menuCategoriaProductoView();
             }else if(op == 2){
-                editarCliente();
-                ClienteDTO.getClienteDTO().setCliente(null);
-                stage.menuClientesView();
+                editarCategoriaProducto();
+                CategoriaProductoDTO.getCategoriaProductoDTO().setCategoriaProducto(null);
+                stage.menuCategoriaProductoView();
+                
             }
-              
         }
     }
-    
-    public void cargarDatos(Cliente cliente){
-        tfClienteId.setText(Integer.toString(cliente.getClienteId()));
-        tfNombre.setText(cliente.getNombre());
-        tfApellido.setText(cliente.getApellido());
-        tfTelefono.setText(cliente.getTelefono());
-        tfDireccion.setText(cliente.getDireccion());
-        tfNit.setText(cliente.getNit());
+
+    public void cargarDatos(CategoriaProducto categoriaProducto){
+        tfCategoriaProductoId.setText(Integer.toString(categoriaProducto.getCategoriaProductosId()));
+        tfNombreCategoria.setText(categoriaProducto.getNombreCategoria());
+        taDescripcionCategoria.setText(categoriaProducto.getDescripcionCategoria());
     }
     
-    public void agregarCliente(){
+    public void agregarCategoriaProducto(){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_agregarCliente(?,?,?,?,?)";
+            String sql = "call sp_agregarCategoriaProducto(?,?)";
             statement = conexion.prepareStatement(sql);
-            statement.setString(1, tfNombre.getText());
-            statement.setString(2, tfApellido.getText());
-            statement.setString(3, tfTelefono.getText());
-            statement.setString(4, tfDireccion.getText());
-            statement.setString(5,tfNit.getText());
+            statement.setString(1, tfNombreCategoria.getText());
+            statement.setString(2, taDescripcionCategoria.getText());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }finally{
             try{
                 if(statement != null){
@@ -104,18 +96,14 @@ public class FormClientesController implements Initializable {
         }
     }
     
-    
-    public void editarCliente(){
+    public void editarCategoriaProducto(){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_editarClientes(?,?,?,?,?,?)";
-            statement  = conexion.prepareStatement(sql);
-            statement.setInt(1, Integer.parseInt(tfClienteId.getText()));
-            statement.setString(2, tfNombre.getText());
-            statement.setString(3, tfApellido.getText());
-            statement.setString(4, tfTelefono.getText());
-            statement.setString(5, tfDireccion.getText());
-            statement.setString(6, tfNit.getText());
+            String sql = "call sp_editarCategoriaProductos(?,?,?)";
+            statement = conexion.prepareStatement(sql);
+            statement.setInt(1, Integer.parseInt(tfCategoriaProductoId.getText()));
+            statement.setString(2, tfNombreCategoria.getText());
+            statement.setString(3, taDescripcionCategoria.getText());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -146,5 +134,6 @@ public class FormClientesController implements Initializable {
         this.op = op;
     }
     
+     
     
 }
